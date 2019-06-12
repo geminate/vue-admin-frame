@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import Layout from '@/layout';
 
 Vue.use(Router);
 
@@ -13,6 +14,16 @@ export default new Router({
         {
             path: '/login',
             component: loadView('login/index')
+        },
+        {
+            path: '/',
+            redirect: '/dashboard',
+            component: Layout,
+            children: [{
+                path: 'dashboard',
+                name: 'Dashboard',
+                component: loadView('dashboard/index')
+            }]
         }
     ]
 })
