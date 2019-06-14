@@ -5,13 +5,16 @@
                 <i :class="item.meta.icon"></i>
                 <span>{{item.meta.title}}</span>
             </template>
-            <side-bar-item v-for="child in item.children" :key="child.path" :item="child" :basePath="resolvePath(item.path)"></side-bar-item>
+            <side-bar-item v-for="child in item.children" :key="child.path" :item="child"
+                           :basePath="resolvePath(item.path)"></side-bar-item>
         </el-submenu>
 
-        <el-menu-item v-else :index="resolvePath(item.path)">
-            <i :class="item.meta.icon"></i>
-            <span slot="title">{{item.meta.title}}</span>
-        </el-menu-item>
+        <router-link v-else :to="resolvePath(item.path)">
+            <el-menu-item :index="resolvePath(item.path)">
+                <i :class="item.meta.icon"></i>
+                <span slot="title">{{item.meta.title}}</span>
+            </el-menu-item>
+        </router-link>
     </div>
 </template>
 
@@ -22,17 +25,7 @@
         name: 'SideBarItem',
         props: ['item', 'basePath'],
         methods: {
-            isExternal(path) {
-                return /^(https?:|mailto:|tel:)/.test(path)
-            },
-
             resolvePath(routePath) {
-                if (this.isExternal(routePath)) {
-                    return routePath
-                }
-                if (this.isExternal(this.basePath)) {
-                    return this.basePath
-                }
                 return path.resolve(this.basePath, routePath)
             }
         }

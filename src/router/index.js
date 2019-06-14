@@ -41,6 +41,7 @@ export default new Router({
                     path: 'nest',
                     name: 'Nest',
                     meta: {title: '多级导航', icon: 'el-icon-s-home'},
+                    component: loadView('nest/index'),
                     children: [
                         {
                             path: 'menu1',
@@ -52,6 +53,7 @@ export default new Router({
                             path: 'menu2',
                             name: 'Menu2',
                             meta: {title: '菜单-2', icon: 'el-icon-s-home'},
+                            component: loadView('nest/menu2/index'),
                             children: [
                                 {
                                     path: 'menu2-1',

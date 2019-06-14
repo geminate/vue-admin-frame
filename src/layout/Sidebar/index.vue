@@ -22,9 +22,6 @@
                 });
                 return routes;
             },
-        },
-        mounted() {
-            console.log(this.routes)
         }
     }
 </script>
