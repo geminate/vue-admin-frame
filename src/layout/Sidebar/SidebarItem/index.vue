@@ -5,8 +5,7 @@
                 <i :class="item.meta.icon"></i>
                 <span>{{item.meta.title}}</span>
             </template>
-            <side-bar-item v-for="child in item.children" :key="child.path" :item="child"
-                           :basePath="resolvePath(item.path)"></side-bar-item>
+            <side-bar-item v-for="child in item.children" :key="child.path" :item="child" :basePath="resolvePath(item.path)"></side-bar-item>
         </el-submenu>
 
         <router-link v-else :to="resolvePath(item.path)">

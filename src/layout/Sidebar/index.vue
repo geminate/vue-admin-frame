@@ -1,5 +1,5 @@
 <template>
-    <el-menu background-color="#304156" text-color="#bfcbd9" active-text-color="#409EFF">
+    <el-menu background-color="#304156" text-color="#bfcbd9" active-text-color="#409EFF" :default-active="$route.path">
         <side-bar-item v-for="route in routes" :key="route.path" :item="route" basePath="/"></side-bar-item>
     </el-menu>
 </template>
@@ -21,7 +21,7 @@
                     (item.isMenu) && (routes = item.children);
                 });
                 return routes;
-            },
+            }
         }
     }
 </script>
