@@ -1,11 +1,12 @@
 <template>
     <div>
-        <el-submenu v-if="item.children && item.children.length > 0" :index="resolvePath(item.path)">
+        <el-submenu v-if="showSubMenu(item)" :index="resolvePath(item.path)">
             <template slot="title">
                 <i :class="item.meta.icon"></i>
                 <span>{{item.meta.title}}</span>
             </template>
-            <side-bar-item v-for="child in item.children" :key="child.path" :item="child" :basePath="resolvePath(item.path)"></side-bar-item>
+            <side-bar-item v-for="child in item.children" :key="child.path" :item="child"
+                           :basePath="resolvePath(item.path)"></side-bar-item>
         </el-submenu>
 
         <router-link v-else :to="resolvePath(item.path)">
@@ -26,6 +27,11 @@
         methods: {
             resolvePath(routePath) {
                 return path.resolve(this.basePath, routePath)
+            },
+
+            // 是否应显示为下拉菜单：含有 children 且 children 不全为 隐藏
+            showSubMenu(item) {
+                return item.children && item.children.length > 0 && item.children.filter(item => !item.hidden).length > 0
             }
         }
     }
