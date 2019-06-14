@@ -32,10 +32,32 @@ export default new Router({
                     meta: {title: '工作台', icon: 'el-icon-s-home'}
                 },
                 {
-                    path: 'form',
-                    name: 'Form',
-                    component: loadView('form/index'),
-                    meta: {title: '表单', icon: 'el-icon-s-home'}
+                    path: 'curd',
+                    name: 'Curd',
+                    component: loadView('curd/index'),
+                    redirect: '/curd/table',
+                    meta: {title: 'curd 标准页面', icon: 'el-icon-s-home'},
+                    children: [
+                        {
+                            path: 'edit',
+                            name: 'Edit',
+                            component: loadView('curd/edit/index'),
+                            meta: {title: '编辑', icon: 'el-icon-s-home', activeMenu: '/curd'},
+                            hidden: true
+                        }, {
+                            path: 'table',
+                            name: 'Table',
+                            component: loadView('curd/table/index'),
+                            meta: {title: '列表', icon: 'el-icon-s-home', activeMenu: '/curd'},
+                            hidden: true
+                        }, {
+                            path: 'show',
+                            name: 'Show',
+                            component: loadView('curd/show/index'),
+                            meta: {title: '查看', icon: 'el-icon-s-home', activeMenu: '/curd'},
+                            hidden: true
+                        },
+                    ]
                 },
                 {
                     path: 'nest',
