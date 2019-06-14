@@ -15,7 +15,7 @@
 
 <script>
     export default {
-        name: 'index',
+        name: 'NavBar',
         methods: {
             logout() {
 

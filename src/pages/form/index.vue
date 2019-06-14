@@ -1,14 +1,15 @@
 <template>
     <div>
-        这是首页
+
     </div>
 </template>
 
 <script>
     export default {
-        name: 'DashboardPage',
+        name: 'Form',
     }
 </script>
 
 <style lang="less" scoped>
+
 </style>
