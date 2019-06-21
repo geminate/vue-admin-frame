@@ -7,7 +7,7 @@ import validate from '@/common/validate';
 
 import 'element-ui/lib/theme-chalk/index.css';
 import 'reset.css/reset.css';
-import '@/assets/css/main.less';
+import '@/assets/css/index.less';
 
 Vue.use(Element);
 

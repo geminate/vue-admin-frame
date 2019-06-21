@@ -1,0 +1,45 @@
+.layout-container {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+    /* 左侧导航 */
+    .side-bar-container {
+        width: 210px;
+        background-color: #304156;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        overflow: hidden;
+
+        .el-scrollbar {
+            height: 100vh;
+
+            .scrollbar-wrapper {
+                overflow-x: hidden;
+                margin-bottom: 0;
+            }
+        }
+
+        .el-menu {
+            border-right: none;
+
+            .el-menu--inline .el-menu-item, .el-menu--inline .el-submenu__title {
+                background-color: #1f2d3d !important;
+
+                &:hover {
+                    background-color: #001528 !important;
+                }
+            }
+        }
+
+    }
+
+    /* 主体内容 */
+    .main-container {
+        margin-left: 210px;
+        min-height: 100vh;
+    }
+}
