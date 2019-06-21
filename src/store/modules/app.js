@@ -1,14 +1,14 @@
 const state = {
-    sideBarOpen: localStorage.getItem('sideBarOpen') ? !!+localStorage.getItem('sideBarOpen') : true, // 侧边导航栏是否完全展开
+    sideBarStatus: localStorage.getItem('sideBarStatus') ? !!+localStorage.getItem('sideBarStatus') : true, // 侧边导航栏是否完全展开
 };
 
 const mutations = {
     TOGGLE_SIDEBAR: state => {
-        state.sideBarOpen = !state.sideBarOpen;
-        if (state.sideBarOpen) {
-            localStorage.setItem('sideBarOpen', 1);
+        state.sideBarStatus = !state.sideBarStatus;
+        if (state.sideBarStatus) {
+            localStorage.setItem('sideBarStatus', 1);
         } else {
-            localStorage.setItem('sideBarOpen', 0);
+            localStorage.setItem('sideBarStatus', 0);
         }
     },
 };
