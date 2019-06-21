@@ -1,11 +1,13 @@
 <template>
-    <el-menu background-color="#304156" text-color="#bfcbd9" active-text-color="#409EFF" :default-active="activePath">
+    <el-menu :collapse="sideBarOpen" background-color="#304156" text-color="#bfcbd9" active-text-color="#409EFF"
+             :default-active="activePath" :collapse-transition="false">
         <side-bar-item v-for="route in routes" :key="route.path" :item="route" basePath="/"></side-bar-item>
     </el-menu>
 </template>
 
 <script>
     import SideBarItem from './SideBarItem';
+    import {mapGetters} from 'vuex';
 
     export default {
         name: 'SideBar',
@@ -13,6 +15,7 @@
             SideBarItem
         },
         computed: {
+            ...mapGetters(['sideBarOpen']),
 
             // 路由列表
             routes() {

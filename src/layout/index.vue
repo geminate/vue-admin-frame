@@ -35,6 +35,10 @@
             bottom: 0;
             left: 0;
             overflow: hidden;
+
+            &.el-menu--collapse {
+                width: 64px;
+            }
         }
 
         .main-container {

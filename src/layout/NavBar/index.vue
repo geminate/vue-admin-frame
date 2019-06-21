@@ -1,5 +1,6 @@
 <template>
     <div class="nav-bar-container">
+        <i class="el-icon-s-fold" @click="toggleSideBar"></i>
         <h1>vue-admin-frame</h1>
         <el-dropdown class="right-menu" trigger="click">
             <div class="avatar-wrapper">
@@ -14,12 +15,15 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex';
+
     export default {
         name: 'NavBar',
         methods: {
-            logout() {
+            ...mapActions(['toggleSideBar']),
 
-            }
+            logout() {
+            },
         }
     }
 </script>
@@ -31,12 +35,19 @@
         box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
         display: flex;
 
+        i {
+            line-height: 54px;
+            font-size: 22px;
+            flex: 0 0 50px;
+            text-align: center;
+        }
+
         h1 {
             flex: 1 1 auto;
             text-align: left;
-            padding-left: 50px;
-            line-height: 50px;
+            line-height: 48px;
             font-size: 25px;
+            padding-left: 20px;
         }
 
         .right-menu {
