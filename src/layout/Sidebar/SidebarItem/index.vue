@@ -31,7 +31,7 @@
 
             // 是否应显示为下拉菜单：含有 children 且 children 不全为 隐藏
             showSubMenu(item) {
-                return item.children && item.children.length > 0 && item.children.filter(item => !item.hidden).length > 0
+                return item.children && item.children.length > 0 && item.children.filter(item => !item.meta.hidden).length > 0
             }
         }
     }

@@ -95,6 +95,44 @@ export default new Router({
                             meta: {title: '菜单-3', icon: 'el-icon-s-grid', breadcrumbClick: true}
                         }
                     ]
+                },
+                {
+                    path: 'outside',
+                    name: 'Outside',
+                    meta: {title: '内嵌外部页面', icon: 'el-icon-menu'},
+                    component: loadView('outside/index'),
+                    children: [
+                        {
+                            path: 'baidu',
+                            name: 'Baidu',
+                            meta: {
+                                title: '百度',
+                                icon: 'el-icon-s-grid',
+                                breadcrumbClick: true,
+                                url: 'http://www.baidu.com'
+                            }
+                        },
+                        {
+                            path: 'weibo',
+                            name: 'Weibo',
+                            meta: {
+                                title: '微博',
+                                icon: 'el-icon-s-grid',
+                                breadcrumbClick: true,
+                                url: 'http://www.weibo.com'
+                            }
+                        },
+                        {
+                            path: 'bilibili',
+                            name: 'Bilibili',
+                            meta: {
+                                title: 'Bilibili',
+                                icon: 'el-icon-s-grid',
+                                breadcrumbClick: true,
+                                url: 'http://www.bilibili.com'
+                            }
+                        }
+                    ]
                 }
             ]
         }
