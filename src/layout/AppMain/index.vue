@@ -1,20 +1,19 @@
 <template>
     <div class="app-main">
-        <router-view/>
+        <breadcrumb class="breadcrumb-container"></breadcrumb>
+        <router-view class="page"/>
     </div>
 </template>
 
 <script>
+    import Breadcrumb from '../Breadcrumb';
+
     export default {
         name: 'AppMain',
+        components: {Breadcrumb}
     }
 </script>
 
 <style lang="less" scoped>
-    .app-main {
-        height: calc(100vh - 50px);
-        box-sizing: border-box;
-        padding: 15px;
-        overflow: auto;
-    }
+    @import url('index.less');
 </style>
