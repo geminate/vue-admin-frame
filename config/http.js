@@ -1,6 +1,6 @@
 const http = {
     baseUrl: {
-        development: '',
+        development: 'http://150.95.147.122:3000/mock/10',
         production: ''
     },
     timeout: 30000, // 请求的超时时间

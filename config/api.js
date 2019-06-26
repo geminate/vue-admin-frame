@@ -1,3 +1,5 @@
-const api = {};
+const api = {
+    login: '/login'
+};
 
 export default api;
