@@ -5,6 +5,7 @@
         <el-dropdown class="right-menu" trigger="click" @command="handleDropDown">
             <div class="avatar-wrapper">
                 <i class="el-icon-user"></i>
+                <span>{{userInfo.name}}</span>
                 <i class="el-icon-caret-bottom"/>
             </div>
             <el-dropdown-menu slot="dropdown">
@@ -15,12 +16,15 @@
 </template>
 
 <script>
-    import {mapActions} from 'vuex';
+    import {mapGetters, mapMutations} from 'vuex';
 
     export default {
         name: 'NavBar',
+        computed: {
+            ...mapGetters(['userInfo'])
+        },
         methods: {
-            ...mapActions(['toggleSideBar', 'logout']),
+            ...mapMutations({toggleSideBar: 'TOGGLE_SIDEBAR', setToken: 'SET_TOKEN'}),
 
             // 下拉菜单按钮点击事件
             handleDropDown(command) {
@@ -29,7 +33,7 @@
 
             // 登出
             async handleLogout() {
-                await this.logout();
+                this.setToken('');
                 this.$router.push('/login');
             },
         }

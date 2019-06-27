@@ -22,7 +22,7 @@
 </template>
 
 <script>
-    import {mapGetters, mapActions} from 'vuex';
+    import {mapGetters, mapMutations} from 'vuex';
 
     export default {
         name: 'Login',
@@ -40,23 +40,39 @@
             }
         },
         methods: {
-            ...mapActions(['login']),
+            ...mapMutations({setToken: 'SET_TOKEN', setUserInfo: 'SET_USERINFO'}),
 
             // 登录按钮点击事件
-            handleLogin() {
+            async handleLogin() {
                 this.$refs.loginForm.validate(async valid => {
                     if (valid) {
                         this.logining = true;
-                        this.login().then(() => {
-                            this.$router.push('/');
-                            this.logining = false;
-                        }).catch((error) => {
-                            this.$utils.error(error);
-                            this.logining = false;
-                        });
-
+                        await this.login();
+                        this.logining = false;
                     }
                 });
+            },
+
+            // 登陆
+            async login() {
+                const {resultCode, resultMessage, token} = await this.$api.login(this.loginForm);
+                if (resultCode == 0) {
+                    this.setToken(token);
+                    await this.refreshUserInfo();
+                } else {
+                    this.$utils.error(resultMessage);
+                }
+            },
+
+            // 刷新用户信息
+            async refreshUserInfo() {
+                const {resultCode, resultMessage, name} = await this.$api.getUserInfo();
+                if (resultCode == 0) {
+                    this.setUserInfo({name});
+                    this.$router.push('/')
+                } else {
+                    this.$utils.error(resultMessage);
+                }
             }
         }
     }

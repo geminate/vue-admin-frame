@@ -5,25 +5,23 @@ import 'nprogress/nprogress.css';
 
 NProgress.configure({showSpinner: false});
 
-const whiteList = ['/login']
+const whiteList = ['/login', '/404'];
 
 router.beforeEach(async (to, from, next) => {
     NProgress.start();
     document.title = to.meta.title || 'vue-admin-frame';
-
-    if (getToken()) {
+    const hasToken = getToken();
+    if (hasToken) {
         if (to.path === '/login') {
             next({path: '/'});
-            NProgress.done();
         } else {
             next();
         }
     } else {
         if (whiteList.indexOf(to.path) !== -1) {
-            next()
+            next();
         } else {
             next({path: '/login'});
-            NProgress.done();
         }
     }
 });
