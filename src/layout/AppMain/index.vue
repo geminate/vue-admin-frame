@@ -1,7 +1,9 @@
 <template>
     <div class="app-main">
         <breadcrumb class="breadcrumb-container"></breadcrumb>
-        <router-view class="page"/>
+        <transition name="fade-transform" mode="out-in">
+            <router-view class="page"/>
+        </transition>
     </div>
 </template>
 
