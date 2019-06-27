@@ -1,12 +1,12 @@
 <template>
     <div class="login-page">
         <el-form class="login-form" ref="loginForm" :model="loginForm" :rules="formRules">
-            <h1>Login Title</h1>
+            <h1>登录页</h1>
 
             <el-form-item prop="username">
                 <i class="input-icon el-icon-user-solid"></i>
                 <el-input v-model="loginForm.username" placeholder="请输入用户名" type="text" name="username"
-                          autofocus></el-input>
+                          autofocus autocomplete="off"></el-input>
             </el-form-item>
 
             <el-form-item prop="password">
@@ -15,36 +15,46 @@
                           show-password></el-input>
             </el-form-item>
 
-            <el-button type="primary" @click="handleLogin">Login</el-button>
+            <el-button type="primary" @click="handleLogin" :disabled="logining">{{logining ? '登陆中...' : '登陆'}}
+            </el-button>
         </el-form>
     </div>
 </template>
 
 <script>
+    import {mapGetters, mapActions} from 'vuex';
+
     export default {
         name: 'Login',
         data() {
             return {
-                loginForm: {
+                loginForm: { // 表单数据
                     username: '', // 用户名
                     password: '', // 密码
                 },
-
-                formRules: {
+                formRules: {  // 校验规则
                     username: [{trigger: 'blur', validator: this.$validate.validUsername}],
                     password: [{trigger: 'blur', validator: this.$validate.validPassword}]
-                }
+                },
+                logining: false // 是否正在登陆中
             }
         },
         methods: {
+            ...mapActions(['login']),
 
             // 登录按钮点击事件
             handleLogin() {
-                this.$refs.loginForm.validate(valid => {
+                this.$refs.loginForm.validate(async valid => {
                     if (valid) {
-                        this.$router.push(`/`);
-                    } else {
-                        return false;
+                        this.logining = true;
+                        this.login().then(() => {
+                            this.$router.push('/');
+                            this.logining = false;
+                        }).catch((error) => {
+                            this.$utils.error(error);
+                            this.logining = false;
+                        });
+
                     }
                 });
             }

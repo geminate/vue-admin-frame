@@ -5,6 +5,7 @@ import store from './store';
 import Element from 'element-ui';
 import validate from '@/common/validate';
 import api from '@/common/request';
+import utils from '@/common/utils';
 import '@/permission';
 
 import 'element-ui/lib/theme-chalk/index.css';
@@ -15,6 +16,7 @@ Vue.use(Element);
 
 Vue.prototype.$validate = validate;
 Vue.prototype.$api = api;
+Vue.prototype.$utils = utils;
 
 Vue.config.productionTip = false;
 

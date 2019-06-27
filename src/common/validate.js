@@ -1,3 +1,4 @@
+// 验证方法
 const validate = {
 
     // 用户名 不为空

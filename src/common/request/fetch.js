@@ -1,7 +1,8 @@
 import Fly from 'flyio';
-import utils from './utils';
-import config from '../../config';
+import utils from '../utils';
+import config from '../../../config';
 
+// HTTP 请求
 class Http {
     constructor(config) {
         this.config = config;
@@ -23,6 +24,7 @@ class Http {
         return this.request.request(reqUrl, this.config.data, {
             method: this.config.method
         }).then(({data}) => {
+            console.log(data)
             this.config.success && this.config.success(data);
         }).catch(e => {
             this.config.error();
@@ -31,7 +33,7 @@ class Http {
 }
 
 const error = () => {
-    utils.toast(config.http.errorMessage, 3000, 'error');
+    utils.error(config.http.errorMessage);
 };
 
 const fetch = (configs) => {
@@ -47,26 +49,4 @@ const fetch = (configs) => {
     }).fetch()
 };
 
-const apiFetch = {};
-
-const fetchPromise = (url, data, method, options) => {
-
-    return new Promise((resolve, reject) => {
-        fetch({
-            url: url,
-            data: data,
-            method: method,
-            success: resolve,
-            ...options
-        })
-    })
-};
-
-for (let key in config.api) {
-    apiFetch[key] = async (params = {}, options = {}, method = 'post') => {
-        const url = config.api[key];
-        return await fetchPromise(url, params, method, options);
-    };
-}
-
-export default apiFetch;
+export default fetch;

@@ -36,6 +36,7 @@
 
             .el-input {
                 flex: 1 1 auto;
+                margin-right: 5px;
 
                 input {
                     background: transparent;
@@ -43,6 +44,15 @@
                     line-height: 47px;
                     height: 47px;
                     color: white;
+                    border-radius: 0;
+                    caret-color: white;
+                    -webkit-appearance: none;
+
+                    &:-webkit-autofill {
+                        box-shadow: 0 0 0 1000px #283443 inset !important;
+                        -webkit-text-fill-color: white !important;
+
+                    }
                 }
             }
         }
