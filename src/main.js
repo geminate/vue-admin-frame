@@ -5,6 +5,7 @@ import store from './store';
 import Element from 'element-ui';
 import validate from '@/common/validate';
 import api from '@/common/request';
+import '@/permission';
 
 import 'element-ui/lib/theme-chalk/index.css';
 import 'reset.css/reset.css';

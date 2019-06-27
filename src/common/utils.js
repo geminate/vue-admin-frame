@@ -1,19 +1,11 @@
+import {Message} from 'element-ui';
+
 const utils = {
 
     // 展示 Toast
-    toast: (msg = '', duration = 3000) => {
-
-    },
-
-    // 显示 Loading
-    showLoading: (msg = '加载中') => {
-
-    },
-
-    // 隐藏 Loading
-    hideLoading: () => {
-
-    },
+    toast: (message = '', duration = 3000, type = 'info') => {
+        Message({message, duration, type});
+    }
 };
 
 export default utils;

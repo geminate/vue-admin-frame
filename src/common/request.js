@@ -19,13 +19,11 @@ class Http {
     }
 
     fetch() {
-        this.config.showLoading && this.config.showLoadingFun();
         const reqUrl = this.config.url;
         return this.request.request(reqUrl, this.config.data, {
             method: this.config.method
         }).then(({data}) => {
             this.config.success && this.config.success(data);
-            this.config.showLoading && this.config.hideLoadingFun();
         }).catch(e => {
             this.config.error();
         })
@@ -33,7 +31,7 @@ class Http {
 }
 
 const error = () => {
-    utils.toast(config.http.errorMessage)
+    utils.toast(config.http.errorMessage, 3000, 'error');
 };
 
 const fetch = (configs) => {
@@ -43,9 +41,6 @@ const fetch = (configs) => {
         data: {},
         success: null,
         error: error,
-        showLoading: true,
-        showLoadingFun: utils.showLoading,
-        hideLoadingFun: utils.hideLoading,
         timeout: config.http.timeout,
         baseUrl: config.http.baseUrl[process.env.NODE_ENV],
         ...configs
