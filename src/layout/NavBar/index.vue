@@ -36,6 +36,9 @@
                 this.setToken('');
                 this.$router.push('/login');
             },
+        },
+        created() {
+            console.log(this.userInfo.name);
         }
     }
 </script>

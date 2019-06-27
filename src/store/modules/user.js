@@ -12,7 +12,7 @@ const mutations = {
         setToken(token);
     },
     SET_USERINFO: (state, userinfo) => {
-        state.userinfo = userinfo;
+        state.userInfo = userinfo;
         setUserInfo(userinfo);
     }
 };
