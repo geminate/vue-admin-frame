@@ -8,11 +8,15 @@ import outsideRoutes from './outsideRoutes';
 
 Vue.use(Router);
 
-export default new Router({
-    routes: [
-        ...constRoutes,
-        ...curdRoutes,
-        ...nestRoutes,
-        ...outsideRoutes
-    ]
-})
+const createRouter = () => new Router({
+    routes: constRoutes
+});
+
+const router = createRouter();
+
+export function resetRouter() {
+    const newRouter = createRouter();
+    router.matcher = newRouter.matcher;
+}
+
+export default router;

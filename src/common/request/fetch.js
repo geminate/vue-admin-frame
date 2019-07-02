@@ -24,7 +24,6 @@ class Http {
         return this.request.request(reqUrl, this.config.data, {
             method: this.config.method
         }).then(({data}) => {
-            console.log(data)
             this.config.success && this.config.success(data);
         }).catch(e => {
             this.config.error();

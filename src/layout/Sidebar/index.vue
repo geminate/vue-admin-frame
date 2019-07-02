@@ -20,11 +20,11 @@
             SideBarItem
         },
         computed: {
-            ...mapGetters(['sideBarStatus']),
+            ...mapGetters(['sideBarStatus', 'routesArr']),
 
             // 路由列表
             routes() {
-                return this.$router.options.routes.filter((item) => {
+                return this.routesArr.filter((item) => {
                     return item.meta.hidden != true
                 });
             },

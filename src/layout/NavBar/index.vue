@@ -16,7 +16,7 @@
 </template>
 
 <script>
-    import {mapGetters, mapMutations} from 'vuex';
+    import {mapGetters, mapActions} from 'vuex';
 
     export default {
         name: 'NavBar',
@@ -24,7 +24,7 @@
             ...mapGetters(['userInfo'])
         },
         methods: {
-            ...mapMutations({toggleSideBar: 'TOGGLE_SIDEBAR', setToken: 'SET_TOKEN'}),
+            ...mapActions(['toggleSideBar', 'logout']),
 
             // 下拉菜单按钮点击事件
             handleDropDown(command) {
@@ -33,12 +33,12 @@
 
             // 登出
             async handleLogout() {
-                this.setToken('');
+                await this.logout();
                 this.$router.push('/login');
             },
         },
         created() {
-            console.log(this.userInfo.name);
+
         }
     }
 </script>

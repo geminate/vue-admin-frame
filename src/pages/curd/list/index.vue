@@ -87,7 +87,6 @@
         },
         methods: {},
         mounted() {
-            this.$api.login();
         }
     }
 </script>

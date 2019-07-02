@@ -13,7 +13,14 @@ const mutations = {
     },
 };
 
+const actions = {
+    toggleSideBar({commit}) {
+        commit('TOGGLE_SIDEBAR')
+    }
+};
+
 export default {
     state,
-    mutations
+    mutations,
+    actions
 }

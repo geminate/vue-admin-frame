@@ -24,5 +24,5 @@ export const setUserInfo = (userInfo) => {
 };
 
 export const removeUserInfo = () => {
-    return sessionStorage.removeItem('userInfo')
+    return sessionStorage.removeItem('userInfo');
 };
