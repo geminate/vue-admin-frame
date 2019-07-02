@@ -8,8 +8,7 @@
     export default {
         name: 'DashboardPage',
         mounted() {
-            console.log(this.$route)
-            console.log(this.$router)
+
         }
     }
 </script>

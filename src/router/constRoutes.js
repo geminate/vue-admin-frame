@@ -15,14 +15,6 @@ const routes = [
         meta: {title: '登陆', hidden: true},
     },
 
-    // 404 页
-    {
-        path: '*',
-        name: '404',
-        component: loadView('404/index'),
-        meta: {title: '404 未找到', hidden: true},
-    },
-
     // 首页
     {
         path: '/',

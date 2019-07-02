@@ -4,7 +4,6 @@ import NProgress from 'nprogress';
 import {getToken} from '@/common/auth';
 import 'nprogress/nprogress.css';
 import utils from '@/common/utils';
-import curdRoutes from '@/router/curdRoutes';
 
 NProgress.configure({showSpinner: false});
 
@@ -23,7 +22,7 @@ router.beforeEach(async (to, from, next) => {
             } else {
                 const {resultCode, resultMessage, pages} = await store.dispatch('refreshUserInfo');
                 if (resultCode == 0) {
-                    const routes = await store.dispatch('handleRoutes', pages);
+                    await store.dispatch('handleRoutes', pages);
                     next({...to, replace: true});
                 } else {
                     utils.error(resultMessage);

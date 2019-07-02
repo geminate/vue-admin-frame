@@ -3,7 +3,7 @@ import api from '@/common/request';
 import router, {resetRouter} from '@/router';
 
 import constRoutes from '@/router/constRoutes';
-import curdRoutes from '@/router/curdRoutes';
+import asyncRoutes from '@/router/asyncRoutes';
 
 const state = {
     token: getToken(), // 用户 Token
@@ -60,12 +60,12 @@ const actions = {
     },
 
     // 添加用户有权限的路由表
-    handleRoutes({commit}, routes) {
+    handleRoutes({commit}, permissionArr) {
         return new Promise(resolve => {
-            const re = constRoutes.concat(curdRoutes); // TODO
-            commit('SET_ROUTESARR', re);
-            router.addRoutes(curdRoutes);
-            resolve(curdRoutes)
+            const asyncPermissionRoutes = filterAsyncRoute(asyncRoutes, permissionArr);
+            commit('SET_ROUTESARR', constRoutes.concat(asyncPermissionRoutes));
+            router.addRoutes(asyncPermissionRoutes);
+            resolve()
         });
     }
 };
@@ -75,4 +75,18 @@ export default {
     mutations,
     actions
 }
+
+const filterAsyncRoute = (asyncRoutes, permissionArr) => {
+    const res = [];
+    asyncRoutes.forEach((item) => {
+        const tmp = {...item};
+        if (permissionArr.includes(tmp.name)) {
+            if (tmp.children) {
+                tmp.children = filterAsyncRoute(tmp.children, permissionArr)
+            }
+            res.push(tmp)
+        }
+    });
+    return res;
+};
 
