@@ -1,6 +1,7 @@
 import Fly from 'flyio';
 import utils from '../utils';
 import config from '../../../config';
+import {getToken} from '../auth';
 
 // HTTP 请求
 class Http {
@@ -13,6 +14,7 @@ class Http {
         this.request = Fly;
         this.request.interceptors.request.use((request) => {
             request.headers['Content-Type'] = 'text/plain';
+            request.headers['X-Token'] = getToken();
             request.timeout = this.config.timeout;
             request.baseURL = this.config.baseUrl;
             return request;
