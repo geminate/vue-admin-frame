@@ -60,7 +60,6 @@ const actions = {
     // 添加用户有权限的路由表
     handleRoutes({commit}, permissionArr) {
         return new Promise(resolve => {
-            console.log(permissionArr);
             const asyncPermissionRoutes = filterAsyncRoute(asyncRoutes, permissionArr);
             commit('SET_ROUTESARR', constRoutes.concat(asyncPermissionRoutes));
             router.addRoutes(asyncPermissionRoutes);
