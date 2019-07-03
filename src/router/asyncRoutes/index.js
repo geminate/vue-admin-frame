@@ -1,6 +1,7 @@
-import curdRoutes from './curdRoutes';
-import nestRoutes from './nestRoutes';
-import outsideRoutes from './outsideRoutes';
+import curdRoutes from './curd';
+import nestRoutes from './nest';
+import outsideRoutes from './outside';
+import systemRoutes from './system';
 
 const loadView = (view) => {
     return () => import(`@/pages/${view}.vue`)
@@ -10,6 +11,7 @@ const asyncRoutes = [
     ...curdRoutes,
     ...nestRoutes,
     ...outsideRoutes,
+    ...systemRoutes,
 
     // 404 页 需要放在动态路由最后
     {
