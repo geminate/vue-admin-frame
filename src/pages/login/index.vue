@@ -40,7 +40,7 @@
             }
         },
         methods: {
-            ...mapActions(['login']),
+            ...mapActions(['login', 'refreshUserInfo']),
 
             // 登录按钮点击事件
             async handleLogin() {
@@ -56,6 +56,16 @@
             // 登陆
             async doLogin() {
                 const {resultCode, resultMessage, token} = await this.login(this.loginForm);
+                if (resultCode == 0) {
+                    await this.doRefreshUserInfo();
+                } else {
+                    this.$utils.error(resultMessage);
+                }
+            },
+
+            // 获取用户信息
+            async doRefreshUserInfo() {
+                const {resultCode, resultMessage} = await this.refreshUserInfo();
                 if (resultCode == 0) {
                     this.$router.push('/');
                 } else {

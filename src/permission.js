@@ -3,7 +3,6 @@ import store from './store';
 import NProgress from 'nprogress';
 import {getToken} from '@/common/auth';
 import 'nprogress/nprogress.css';
-import utils from '@/common/utils';
 
 NProgress.configure({showSpinner: false});
 
@@ -17,17 +16,11 @@ router.beforeEach(async (to, from, next) => {
         if (to.path === '/login') {
             next({path: '/'});
         } else {
-            if (store.getters.userInfo && store.getters.userInfo.name) {
-                next();
+            if (!store.getters.haveSetRouter) {
+                await store.dispatch('handleRoutes', store.getters.userInfo.pages);
+                next({...to, replace: true});
             } else {
-                const {resultCode, resultMessage, pages} = await store.dispatch('refreshUserInfo');
-                if (resultCode == 0) {
-                    await store.dispatch('handleRoutes', pages);
-                    next({...to, replace: true});
-                } else {
-                    utils.error(resultMessage);
-                    next('/login');
-                }
+                next();
             }
         }
     } else {
@@ -35,6 +28,7 @@ router.beforeEach(async (to, from, next) => {
             next();
         } else {
             next({path: '/login'});
+            NProgress.done();
         }
     }
 });
