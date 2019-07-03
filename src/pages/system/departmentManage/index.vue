@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="department-manage-page">
+
     </div>
 </template>
 
