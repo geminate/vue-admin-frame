@@ -4,23 +4,46 @@
     box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
     display: flex;
 
+    h1 {
+        flex: 0 0 64px;
+        line-height: 48px;
+        font-size: 25px;
+        text-align: center;
+        border-right: 1px solid #EFEFEF;
+        box-sizing: border-box;
+        overflow: hidden;
+        transition: all 0.3s;
+
+        &.open {
+            flex: 0 0 210px;
+        }
+    }
+
     .el-icon-s-fold {
         line-height: 54px;
         font-size: 22px;
         flex: 0 0 50px;
-        text-align: center;
+        text-align: left;
+        margin-left: 15px;
     }
 
-    h1 {
+    .top-menu {
         flex: 1 1 auto;
-        text-align: left;
-        line-height: 48px;
-        font-size: 25px;
-        padding-left: 20px;
+        display: flex;
+        border: none;
+
+        /deep/ .el-menu-item, /deep/ .el-submenu .el-submenu__title{
+            line-height: 50px;
+            height: 50px;
+        }
+    }
+
+    .dropdown-container {
+        flex: 0 0 150px;
+        text-align: right;
     }
 
     .right-menu {
-        flex: 0 0 auto;
 
         .avatar-wrapper {
             padding-right: 25px;

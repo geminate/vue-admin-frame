@@ -1,8 +1,8 @@
 <template>
     <div class="layout-container" :class="{'hide-side-bar':sideBarStatus}">
-        <side-bar></side-bar>
+        <nav-bar></nav-bar>
         <div class="main-container">
-            <nav-bar></nav-bar>
+            <side-bar></side-bar>
             <app-main></app-main>
         </div>
     </div>
