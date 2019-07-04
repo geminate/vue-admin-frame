@@ -1,4 +1,13 @@
-import {getToken, setToken, getUserInfo, setUserInfo, getRoutesArr, setRoutesArr} from "../../common/auth";
+import {
+    getToken,
+    setToken,
+    getUserInfo,
+    setUserInfo,
+    getRoutesArr,
+    setRoutesArr,
+    getLeftRoutes,
+    setLeftRoutes
+} from "../../common/auth";
 import api from '@/common/request';
 import router, {resetRouter} from '@/router';
 
@@ -9,6 +18,7 @@ const state = {
     token: getToken(), // 用户 Token
     userInfo: getUserInfo(), // 用户信息
     routesArr: getRoutesArr(), // 当前用户有权限的全部路由
+    leftRoutes: getLeftRoutes(),
     haveSetRouter: false, // 是否已将异步路由加入 router 中
 };
 
@@ -24,6 +34,10 @@ const mutations = {
     SET_ROUTESARR: (state, routesArr) => {
         state.routesArr = routesArr;
         setRoutesArr(routesArr);
+    },
+    SET_LEFTROUTES: (state, leftRoutes) => {
+        state.leftRoutes = leftRoutes;
+        setLeftRoutes(leftRoutes);
     },
     SET_HAVESETROUTER: (state, haveSetRouter) => {
         state.haveSetRouter = haveSetRouter;
@@ -66,6 +80,10 @@ const actions = {
             commit('SET_HAVESETROUTER', true);
             resolve()
         });
+    },
+
+    setLeftRoutes({commit}, leftRoutes) {
+        commit('SET_LEFTROUTES', leftRoutes);
     },
 
     // 登出

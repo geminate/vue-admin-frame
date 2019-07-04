@@ -19,11 +19,12 @@ const routes = [
     {
         path: '/',
         redirect: '/dashboard',
+        name: 'dashboard',
         component: Layout,
         meta: {title: '首页', icon: 'el-icon-s-home'},
         children: [{
             path: 'dashboard',
-            name: 'dashboard',
+            name: 'dashboard-page',
             component: loadView('dashboard/index'),
             meta: {title: '首页', activeMenu: '/', hidden: true}
         }]

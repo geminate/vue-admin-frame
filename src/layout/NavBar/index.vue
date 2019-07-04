@@ -4,10 +4,12 @@
         <i class="el-icon-s-fold" @click="toggleSideBar"></i>
 
 
-        <el-menu :default-active="activePath" mode="horizontal" class="top-menu">
-            <side-bar-item v-for="route in routes" :key="route.path" :item="route" basePath="/"></side-bar-item>
-        </el-menu>
-
+        <ul class="top-menu">
+            <li v-for="route in routes" @click="handleNavClick(route)" :class="{active:route.name == activeMenu}">
+                <i :class="route.meta.icon"></i>
+                {{route.meta.title}}
+            </li>
+        </ul>
 
         <div class="dropdown-container">
             <el-dropdown class="right-menu" trigger="click" @command="handleDropDown">
@@ -27,9 +29,15 @@
 <script>
     import {mapGetters, mapActions} from 'vuex';
     import SideBarItem from '../SideBar/SideBarItem';
+    import path from 'path';
 
     export default {
         name: 'NavBar',
+        data() {
+            return {
+                activeMenu: 'dashboard'
+            }
+        },
         components: {
             SideBarItem
         },
@@ -48,8 +56,14 @@
                 });
             },
         },
+        watch: {
+            $route() {
+                this.activeMenu = this.$route.matched[0].name;
+                this.setLeftRoutes(this.getLeftRoutes(this.$route.matched[0]));
+            }
+        },
         methods: {
-            ...mapActions(['toggleSideBar', 'logout']),
+            ...mapActions(['toggleSideBar', 'hideSideBar', 'showSideBar', 'logout', 'setLeftRoutes']),
 
 
             // 下拉菜单按钮点击事件
@@ -62,9 +76,52 @@
                 await this.logout();
                 this.$router.push('/login');
             },
-        },
-        created() {
 
+            isActive(menu) {
+                let re = false
+                this.$route.matched.map((item) => {
+                    item.path == "" && (item.path = "/");
+                    if (item.path == menu.path) {
+                        re = true;
+                    }
+                });
+                return re;
+            },
+
+            handleNavClick(item) {
+                this.activeMenu = item.name;
+                if (this.showSubMenu(item)) {
+                    this.showSideBar();
+                    this.setLeftRoutes(this.getLeftRoutes(item));
+                } else {
+                    this.$router.push(item.redirect);
+                    this.setLeftRoutes([]);
+                    this.hideSideBar();
+                }
+            },
+
+            showSubMenu(item) {
+                return item.children && item.children.length > 0 && item.children.filter(item => !item.meta.hidden).length > 0
+            },
+
+            getLeftRoutes(current) {
+                const currentName = current.name;
+                let re = [];
+                this.routesArr.forEach((item) => {
+                    if (item.name == currentName) {
+                        item.children.map((item) => {
+                            item.path = path.resolve(current.path, item.path);
+                            return item;
+                        });
+                        re = item.children;
+                    }
+                });
+                return re;
+            }
+        },
+        mounted() {
+            this.activeMenu = this.$route.matched[0].name;
+            this.setLeftRoutes(this.getLeftRoutes(this.$route.matched[0]));
         }
     }
 </script>

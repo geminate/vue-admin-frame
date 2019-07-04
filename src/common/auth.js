@@ -31,3 +31,16 @@ export const getRoutesArr = () => {
 export const setRoutesArr = (routesArr) => {
     return sessionStorage.setItem('routesArr', JSON.stringify(routesArr));
 };
+
+export const getLeftRoutes = () => {
+    const leftRoutes = sessionStorage.getItem('leftRoutes');
+    if (leftRoutes) {
+        return JSON.parse(leftRoutes);
+    } else {
+        return [];
+    }
+};
+
+export const setLeftRoutes = (leftRoutes) => {
+    return sessionStorage.setItem('leftRoutes', JSON.stringify(leftRoutes));
+};

@@ -11,7 +11,6 @@ const routes = [
         path: '/system',
         name: 'system',
         component: Layout,
-        redirect: '/system/userManage',
         meta: {title: '系统管理', icon: 'el-icon-s-data'},
         children: [
             {
